@@ -1,0 +1,20 @@
+{
+    "cordova-zeroconf-plugin": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vstirbu/ZeroConf.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-whitelist",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
