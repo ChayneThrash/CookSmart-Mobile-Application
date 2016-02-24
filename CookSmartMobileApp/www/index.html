@@ -8,28 +8,38 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/index.css">
         <title>CookSmart Home</title>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px; min-height: 25px;">
-            <p class='pull-left'>CookSmart</p>
-            <div style="height: 25px;" id="ConnectingToHub">
-                <img class='pull-right' src='img/spin.svg'>
-                <p class='pull-right' style='padding-right: 10px;'>Connecting to hub</p>
-            </div>
-            <div style="height: 25px;" id="ConnectedToHub">
-                <p class='pull-right'>Connected</p>
-            </div>
-        </nav>
-        <div style='padding-top: 31px;' id='wrapper'>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <button class="btn btn-secondary" id='refreshButton'>Refresh</button>
+        <div class="header">
+            <p class='header-text cooksmart-header'>CookSmart</p>
+            <div class='Hub-connection-status'>
+                <div id="ConnectingToHub">
+                    <img class='connecting-img' style="display: inline; float: right!important;" src='img/spin.svg'>
+                    <p class='header-text connecting-text' style="float: right!important;">Connecting to hub</p>
+                </div>
+                <div id="ConnectedToHub">
+                    <p class='header-text connected-text' style="float: right!important;">Connected</p>
                 </div>
             </div>
-            <div class="list-group" id="DeviceList">
-            </div>
         </div>
+        
+        <div class="menu-selection-container menu-toggle">
+            <a style="height: 100%; width: 100%;">
+                <i class="fa fa-bars fa-3x"></i>
+            </a>
+        </div>
+        
+        <div class='device-status-container'>
+            
+        </div>
+        
+        <div class="refresh-button-container">
+            <a href="#" id='refreshButton'><span class='glyphicon glyphicon-align-center glyphicon-refresh'></span></a>
+        </div>
+        
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->

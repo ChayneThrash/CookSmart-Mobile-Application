@@ -1,12 +1,9 @@
 html, body {
-  /*background: linear-gradient(#AA4446, #D27B7C);*/
-  background: linear-gradient(#5B9BD5, #DDEBF7);
-  margin: 0;
+  background: linear-gradient(#5B9BD5, #C2DAEF);
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100%;
   margin: 0;
-
 }
 
 .logo-container {
