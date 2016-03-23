@@ -15,18 +15,13 @@ var app = {
         //     window.location.href = "login.html";   
         //}
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
-        app.drawButtons();
+        app.drawRefreshButton();
         app.drawMenuButton();
         app.onStartCooking();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
-<<<<<<< HEAD
-        
-        $("#refreshButton").on('click', app.updateDeviceStatus);
-=======
         $("#recipe").on('click',function() { window.location.href="recipe.html"});
         $("#refreshButton").on('click', app.updateDeviceList);
         $("#deviceListItem").on('click', app.onDeviceSelection);
->>>>>>> UI-Design-Jeff
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
         var hubInit = new HubInitializer( function(ip)  { app.onHubInitialization(ip); });
@@ -37,56 +32,41 @@ var app = {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
         this.serverIp = ip;
-        app.updateDeviceStatus();
+        app.updateDeviceList();
     },
     
-    updateDeviceStatus: function() {
+    updateDeviceList: function() {
         if (app.serverIp === null) {
             alert('Please wait until hub has been connected.');
         }
         else{
-            $.getJSON('http://' + app.serverIp + ':' + app.serverPort + '/GetDeviceStatus', function(response) {
-                if (response.status === "ok") {
-                    $("#device-status-text").text("Device status: " + response.deviceStatus);
-                    var buttonProperties = {
-                        text: (response.deviceStatus === 'idle') ? "Load Recipe" : "Stop",
-                        onClick: (response.deviceStatus === 'idle') ? app.openLoadRecipeModal : app.stopDevice
-                    };
-                    $("#device-button").text(buttonProperties.text);
-                    $("#device-button").on('click', buttonProperties.onClick);
-                } else {
-                    // handle error response.
-                }
-            }); // TODO: add a failure callback. 
+            $.getJSON('http://' + app.serverIp + ':' + app.serverPort + '/GetCookerList', function(deviceIds) {
+                $("#DeviceList").empty();
+                $.each(deviceIds.docs, function(i, item) {
+                    $("#DeviceList").append('<a class="device-item" href="#" id="deviceListItem">' + item._id + '</a>');
+                });
+            });    
         }
     },
     
-    drawButtons: function() {
+    onDeviceSelection: function() {
+        window.sessionStorage.deviceId = $(this).innerHtml;
+        window.href = 'app.html';
+    },
+    
+    drawRefreshButton: function() {
         var buttonDiameter = $(".refresh-button-container").width();
         $(".refresh-button-container").css({height: buttonDiameter + "px"});
-        $(".device-button-container").css({height: buttonDiameter + "px"});
     },
     
     /*
     drawMenuButton: function() {
         var buttonDiameter = $(".menu-selection-container").width();
-<<<<<<< HEAD
-        $(".menu-selection-container").css({ height: buttonDiameter + "px" });
-    },
-    
-    openLoadRecipeModal() {
-        // do this
-    },
-    
-    stopDevice() {
-        // do this as well
-=======
         $(".menu-selection-container").css({height: buttonDiameter + "px"});
     },
     */
     onStartCooking: function() {
         alert('Cooking has Now Begun.');
->>>>>>> UI-Design-Jeff
     }
 };
 
