@@ -17,3 +17,16 @@ html, body {
 .header-text {
     color: white;
 }
+
+.cooksmart-header {
+    height: 100%;
+    float: left;
+    display: inline;
+    font-family: 'Atomic Age', cursive;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.connected-text {
+    display: inline;
+}

@@ -51,10 +51,6 @@ html, body {
 }
 
 #refreshButton {
-    font-size: 60px;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
 }
 
 .list-header {
@@ -73,37 +69,6 @@ html, body {
     width: 9%;
     top: 10%;
     right: 12%;
-<<<<<<< HEAD
-}
-
-.device-status-container {
-    position: fixed;
-    top: 30%;
-    right: 15%;
-    left: 15%;
-    width: 70%;
-    height: 30%;
-    border-radius: 10%;
-    background: #FFFFFF;
-}
-
-.device-status-text {
-    
-}
-
-.device-button-container {
-    position: fixed;
-    bottom: 8%;
-    left: 12%;
-    width: 30%;
-}
-
-#device-button {
-    width: 100%;
-    height: 100%;
-    border-radius: 10%;
-}
-=======
     bottom: 8%;
 }
 .cooknow-button{
@@ -181,4 +146,3 @@ html, body {
     color: white;
 }
 
->>>>>>> UI-Design-Jeff
