@@ -1,5 +1,5 @@
 html, body {
-    background: #ACCCEA;
+    background: #A1C8ED;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -9,12 +9,13 @@ html, body {
 
 .header {
     width: 100%;
-    height: 5%;
-    background: #5B9BD5;
+    height: 7%;
+    background: #287FCC;
+    position: fixed;
 }
 
 .header-text {
-    color: black;
+    color: white;
 }
 
 .Hub-connection-status {
@@ -23,14 +24,17 @@ html, body {
 
 .connecting-text {
     padding-right: 2%;
+    padding-top: 3%;
     display: inline;
 }
 
 .cooksmart-header {
+    height: 100%;
     float: left;
     display: inline;
-    font-family: cursive;
+    font-family: 'Atomic Age', cursive;
     font-weight: bold;
+    font-size: xx-large;
 }
 
 .connected-text {
@@ -42,7 +46,7 @@ html, body {
     width: 20%;
     border-radius: 50%;
     bottom: 8%;
-    right: 12%;
+    right: 10%;
     background: #FFFFFF;
 }
 
@@ -62,7 +66,83 @@ html, body {
 
 .menu-selection-container {
     position: fixed;
-    width: 12%;
-    top: 12%;
+    width: 9%;
+    top: 10%;
     right: 12%;
+    bottom: 8%;
 }
+.cooknow-button{
+    background-color: #287FCC; /*blue same as header */
+    border: double; 
+    color: white;
+    padding: 16px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-size: x-large;
+    margin: 0px 0px;
+    cursor: pointer;
+    position: fixed;
+    top: 65%;
+    left: 4%;
+    height: 11%;
+    width: 90%;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    
+}
+
+.cooknow-button:hover{
+    background-color: #7BBDF7; /* lighter blue */
+    color: white;
+}
+
+.currentRecipe-button{
+    background-color: #287FCC; /* same as header */
+    border: double;
+    color: white;
+    padding: 16px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-size: x-large;
+    margin: 0px 0px;
+    cursor: pointer;
+    position: fixed;
+    height: 11%;
+    width: 90%;
+    top: 52%;
+    left: 4%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.currentRecipe-button:hover{
+    background-color: #7BBDF7; /* lighter blue */
+    color: white;
+}
+
+.status-button{
+    background-color: #287FCC;
+    border: double;
+    color: white;
+    padding: 0px 0px 0px;
+    display: inline-block;
+    margin: 0px 0px;
+    cursor: pointer;
+    position: fixed;
+    height: 40%;
+    width: 90%;
+    top: 10%;
+    left: 4%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.status-button:hover{
+    background-color: #7BBDF7; /* lighter blue */
+    color: white;
+}
+

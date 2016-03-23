@@ -17,11 +17,13 @@ var app = {
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawRefreshButton();
         app.drawMenuButton();
+        app.onStartCooking();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
-        
+        $("#recipe").on('click',function() { window.location.href="recipe.html"});
         $("#refreshButton").on('click', app.updateDeviceList);
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
+        $("#startCooking").on('click', function() { onStartCooking});
         var hubInit = new HubInitializer( function(ip)  { app.onHubInitialization(ip); });
         hubInit.InitializeHub("");        
     },
@@ -57,11 +59,15 @@ var app = {
         $(".refresh-button-container").css({height: buttonDiameter + "px"});
     },
     
+    /*
     drawMenuButton: function() {
         var buttonDiameter = $(".menu-selection-container").width();
         $(".menu-selection-container").css({height: buttonDiameter + "px"});
+    },
+    */
+    onStartCooking: function() {
+        alert('Cooking has Now Begun.');
     }
-    
 };
 
 

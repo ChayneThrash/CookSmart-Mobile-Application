@@ -10,8 +10,8 @@
         <param name="onload" value="true" />
     </feature>
     <allow-intent href="market:*" />
-    <name>helloworld2</name>
-    <description>Hello World sample application that responds to the deviceready event.</description>
+    <name>CookSmart Mobile</name>
+    <description>CookSmart application for use with the CookSmart applience</description>
     <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
     <content src="index.html" />
     <preference name="permissions" value="none" />
@@ -51,10 +51,10 @@
     <gap:plugin name="cordova-plugin-file-transfer" source="npm" />
     <gap:plugin name="cordova-plugin-inappbrowser" source="npm" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <icon src="icon.png" />
-    <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
-    <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
-    <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
+    <icon src="www/res/icon/android/CookSmartIcon72.png" />
+    <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/CookSmartIcon36.png" />
+    <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/CookSmartIcon48.png" />
+    <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/CookSmartIcon72.png" />
     <icon gap:platform="android" gap:qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
     <icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />
     <icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />
@@ -84,6 +84,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
+    <preference name="orientation" value="portrait" />
     <gap:config-file parent="/manifest" platform="android">
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.READ_PHONE_STATE" />
