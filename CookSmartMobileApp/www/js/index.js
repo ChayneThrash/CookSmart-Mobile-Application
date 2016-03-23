@@ -17,10 +17,18 @@ var app = {
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawButtons();
         app.drawMenuButton();
+        app.onStartCooking();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
+<<<<<<< HEAD
         
         $("#refreshButton").on('click', app.updateDeviceStatus);
+=======
+        $("#recipe").on('click',function() { window.location.href="recipe.html"});
+        $("#refreshButton").on('click', app.updateDeviceList);
+        $("#deviceListItem").on('click', app.onDeviceSelection);
+>>>>>>> UI-Design-Jeff
         $("#ConnectedToHub").hide();
+        $("#startCooking").on('click', function() { onStartCooking});
         var hubInit = new HubInitializer( function(ip)  { app.onHubInitialization(ip); });
         hubInit.InitializeHub("");        
     },
@@ -59,8 +67,10 @@ var app = {
         $(".device-button-container").css({height: buttonDiameter + "px"});
     },
     
+    /*
     drawMenuButton: function() {
         var buttonDiameter = $(".menu-selection-container").width();
+<<<<<<< HEAD
         $(".menu-selection-container").css({ height: buttonDiameter + "px" });
     },
     
@@ -70,8 +80,14 @@ var app = {
     
     stopDevice() {
         // do this as well
+=======
+        $(".menu-selection-container").css({height: buttonDiameter + "px"});
+    },
+    */
+    onStartCooking: function() {
+        alert('Cooking has Now Begun.');
+>>>>>>> UI-Design-Jeff
     }
-    
 };
 
 
