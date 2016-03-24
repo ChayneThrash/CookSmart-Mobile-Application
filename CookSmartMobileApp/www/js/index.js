@@ -16,11 +16,9 @@ var app = {
         //}
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawRefreshButton();
-        app.drawMenuButton();
-        app.onStartCooking();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
         $("#recipe").on('click',function() { window.location.href="recipe.html"});
-        $("#refreshButton").on('click', app.updateDeviceList);
+        $(".refresh-button-container").on('click', app.updateDeviceList);
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
@@ -32,26 +30,27 @@ var app = {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
         this.serverIp = ip;
-        app.updateDeviceList();
+        app.updateDeviceStatus();
     },
     
-    updateDeviceList: function() {
+    updateDeviceStatus: function() {
         if (app.serverIp === null) {
             alert('Please wait until hub has been connected.');
+        } else {
+            $.getJSON('http://' + app.serverIp + ':' + app.serverPort + '/GetDeviceStatus', function(response) {
+                    if (response.status === "ok") {
+                   $("#device-status-text").text("Device status: " + response.deviceStatus);
+                   var buttonProperties = {
+                       text: (response.deviceStatus === 'idle') ? "Load Recipe" : "Stop",
+                       onClick: (response.deviceStatus === 'idle') ? app.openLoadRecipeModal : app.stopDevice
+                   };
+                   $("#device-button").text(buttonProperties.text);
+                   $("#device-button").on('click', buttonProperties.onClick);
+               } else {
+                    // handle error response.
+               }
+           }); // TODO: add a failure callback.   
         }
-        else{
-            $.getJSON('http://' + app.serverIp + ':' + app.serverPort + '/GetCookerList', function(deviceIds) {
-                $("#DeviceList").empty();
-                $.each(deviceIds.docs, function(i, item) {
-                    $("#DeviceList").append('<a class="device-item" href="#" id="deviceListItem">' + item._id + '</a>');
-                });
-            });    
-        }
-    },
-    
-    onDeviceSelection: function() {
-        window.sessionStorage.deviceId = $(this).innerHtml;
-        window.href = 'app.html';
     },
     
     drawRefreshButton: function() {
