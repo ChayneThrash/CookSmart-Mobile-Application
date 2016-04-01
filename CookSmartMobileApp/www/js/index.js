@@ -18,13 +18,10 @@ var app = {
         app.drawRefreshButton();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
         $("#recipe").on('click',function() { window.location.href="recipe.html"});
-        //$(".refresh-button-container").on('click', app.updateDeviceList);
-        $(".refresh-button-container").on('click', app.isLoggedIn);
+        $(".refresh-button-container").on('click', app.updateDeviceList);
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
-        var hubInit = new HubInitializer( function(ip)  { app.onHubInitialization(ip); });
-        hubInit.InitializeHub("");
     },
     
     onHubInitialization: function(ip) {
