@@ -1,6 +1,6 @@
 var app = {
-    serverIp: null,
-    serverPort: 8081,
+    
+    server: 'http://192.168.1.33:8080',
     
     initialize: function() {
         this.bindEvents();
@@ -11,47 +11,59 @@ var app = {
     },
     
     onDeviceReady: function() {
-        //if (!sessionStorage.user) {
-        //     window.location.href = "login.html";   
-        //}
+        if (!sessionStorage.user) {
+             window.location.href = "login.html";
+        }
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawRefreshButton();
-        app.drawMenuButton();
-        app.onStartCooking();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
         $("#recipe").on('click',function() { window.location.href="recipe.html"});
-        $("#refreshButton").on('click', app.updateDeviceList);
+        //$(".refresh-button-container").on('click', app.updateDeviceList);
+        $(".refresh-button-container").on('click', app.isLoggedIn);
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
         var hubInit = new HubInitializer( function(ip)  { app.onHubInitialization(ip); });
-        hubInit.InitializeHub("");        
+        hubInit.InitializeHub("");
     },
     
     onHubInitialization: function(ip) {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
-        this.serverIp = ip;
-        app.updateDeviceList();
+        this.server = ip;
+        app.updateDeviceStatus();
     },
     
-    updateDeviceList: function() {
-        if (app.serverIp === null) {
-            alert('Please wait until hub has been connected.');
-        }
-        else{
-            $.getJSON('http://' + app.serverIp + ':' + app.serverPort + '/GetCookerList', function(deviceIds) {
-                $("#DeviceList").empty();
-                $.each(deviceIds.docs, function(i, item) {
-                    $("#DeviceList").append('<a class="device-item" href="#" id="deviceListItem">' + item._id + '</a>');
-                });
-            });    
-        }
+    isLoggedIn: function() {
+        $.ajax({
+            url: "http://192.168.1.33:8080/IsLoggedIn",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function(response) {
+               alert(response);
+            }
+        });
     },
     
-    onDeviceSelection: function() {
-        window.sessionStorage.deviceId = $(this).innerHtml;
-        window.href = 'app.html';
+    updateDeviceStatus: function() {
+        $.ajax({
+            url: app.server + '/GetDeviceStatus',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            success: function(response) {
+                if (response.status === "ok") {
+                   $("#device-status-text").text("Device status: " + response.deviceStatus);
+                   var buttonProperties = {
+                       text: (response.deviceStatus === 'idle') ? "Load Recipe" : "Stop",
+                       onClick: (response.deviceStatus === 'idle') ? app.openLoadRecipeModal : app.stopDevice
+                   };
+                   $("#device-button").text(buttonProperties.text);
+                   $("#device-button").on('click', buttonProperties.onClick);
+               } else {
+                    // handle error response.
+               }
+            }
+        });
     },
     
     drawRefreshButton: function() {

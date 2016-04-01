@@ -51,6 +51,10 @@ html, body {
 }
 
 #refreshButton {
+    font-size: 60px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 }
 
 .list-header {
