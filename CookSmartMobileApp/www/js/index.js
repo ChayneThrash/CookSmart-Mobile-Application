@@ -1,6 +1,7 @@
 var app = {
     
     server: 'http://192.168.1.33:8080',
+    deviceConnected: false,
     
     initialize: function() {
         this.bindEvents();
@@ -11,7 +12,7 @@ var app = {
     },
     
     onDeviceReady: function() {
-        if (!sessionStorage.user) {
+        if (window.localStorage.getItem('user') == null) {
              window.location.href = "login.html";
         }
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
@@ -22,12 +23,35 @@ var app = {
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
+        app.connectToDevice();
     },
     
-    onHubInitialization: function(ip) {
+    connectToDevice: function() {
+        if (JSON.parse(localStorage.getItem('user')).deviceId == null) {
+            setTimeout(app.connectToDevice, 10000);
+        } else {
+            $.ajax({
+                url: "http://192.168.1.35:8080/IsDeviceConnected",
+                type: "POST",
+                data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId }),
+                contentType: "application/json; charset=utf-8",
+                success: function(response) {
+                    if (response.status === "ok") {
+                        if (!app.deviceConnected) {
+                            app.onHubInitialization();   
+                        } 
+                    } else {
+                        app.deviceConnected = false;
+                    }
+                    setTimeout(app.connectToDevice, 10000);
+                }
+            }); 
+        }
+    },
+    
+    onHubInitialization: function() {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
-        this.server = ip;
         app.updateDeviceStatus();
     },
     

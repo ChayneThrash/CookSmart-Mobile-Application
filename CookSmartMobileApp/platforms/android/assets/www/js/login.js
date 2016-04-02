@@ -18,13 +18,13 @@ var login = {
             createAccount: login.createAccountToggledOn
         };
         $.ajax({
-            url: "http://192.168.1.33:8080/Login",
+            url: "http://192.168.1.35:8080/Login",
             type: "POST",
             data: JSON.stringify(params),
             contentType: "application/json; charset=utf-8",
             success: function(response) {
                if (response.status === "ok") {
-                    window.sessionStorage.user = response.user;
+                    window.localStorage.setItem('user', JSON.stringify(response.user));
                     window.location.href = "index.html";
                } else {
                     alert(response.message);
