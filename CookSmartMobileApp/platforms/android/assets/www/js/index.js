@@ -1,6 +1,6 @@
 var app = {
     
-    server: 'http://192.168.1.33:8080',
+    server: 'http://192.168.1.35:8080',
     deviceConnected: false,
     
     initialize: function() {
@@ -31,13 +31,14 @@ var app = {
             setTimeout(app.connectToDevice, 10000);
         } else {
             $.ajax({
-                url: "http://192.168.1.35:8080/IsDeviceConnected",
+                url: app.server + "/IsDeviceConnected",
                 type: "POST",
                 data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId }),
                 contentType: "application/json; charset=utf-8",
                 success: function(response) {
                     if (response.status === "ok") {
                         if (!app.deviceConnected) {
+                            app.deviceConnected = true;
                             app.onHubInitialization();   
                         } 
                     } else {
@@ -71,6 +72,7 @@ var app = {
             url: app.server + '/GetDeviceStatus',
             type: "POST",
             contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: "" }),
             success: function(response) {
                 if (response.status === "ok") {
                    $("#device-status-text").text("Device status: " + response.deviceStatus);
