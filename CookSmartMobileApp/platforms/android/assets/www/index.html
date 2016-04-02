@@ -11,11 +11,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/index.css">
         <title>CookSmart Home</title>
-        <script>
-        function recipe(){
-            window.location.href="recipe.html";
-        }
-        </script>
         
         <style>
             ul{
@@ -66,22 +61,22 @@
         </div>
         
         <div class='device-status-container'>
-            <p>status: unknown</p>
+            <p id="device-status-text">status: unknown</p>
         </div>
         
         <div class="refresh-button-container">
             <span id='refreshButton' class='glyphicon glyphicon-refresh'></span>
         </div>
         
-        <button id="startCooking", class="cooknow-button">
-            <p>Start Cooking</p>
+        <button id="startCooking" class="cooknow-button">
+            Start Cooking
         </button>
             
-        <button id="recipe" onclick="recipe()", class="currentRecipe-button">
-            <p>Current Recipe</p>
-        </button>
+        <select id="recipeSelect" class="currentRecipe-button">
+            <option value="" selected disabled>Select a recipe</option>
+        </select>
         
-        <button class="status-button">
+        <button class='status-button'>
             <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
         </button> 
         
@@ -99,6 +94,7 @@
         <script type="text/javascript" src="js/rng-browser.js"></script>
         <script type="text/javascript" src="js/uuid.js"></script>
         <script type="text/javascript" src="js/sessions.js"></script>
+        <script type="text/javascript" src="js/RecipeValidator.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

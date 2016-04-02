@@ -18,7 +18,6 @@ var app = {
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawRefreshButton();
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
-        $("#recipe").on('click',function() { window.location.href="recipe.html"});
         $(".refresh-button-container").on('click', app.updateDeviceList);
         $("#deviceListItem").on('click', app.onDeviceSelection);
         $("#ConnectedToHub").hide();
@@ -54,6 +53,7 @@ var app = {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
         app.updateDeviceStatus();
+        app.getRecipes();
     },
     
     isLoggedIn: function() {
@@ -77,11 +77,38 @@ var app = {
                 if (response.status === "ok") {
                    $("#device-status-text").text("Device status: " + response.deviceStatus);
                    var buttonProperties = {
-                       text: (response.deviceStatus === 'idle') ? "Load Recipe" : "Stop",
+                       text: (response.deviceStatus === 'idling') ? "Load Recipe" : "Stop",
                        onClick: (response.deviceStatus === 'idle') ? app.openLoadRecipeModal : app.stopDevice
                    };
                    $("#startCooking").text(buttonProperties.text);
                    $("#startCooking").on('click', buttonProperties.onClick);
+               } else {
+                    // handle error response.
+               }
+            }
+        });
+    },
+    
+    getRecipes: function() {
+        $.ajax({
+            url: app.server + '/GetRecipes',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: "" }),
+            success: function(response) {
+                if (response.status === "ok") {
+                    $("#recipeSelect").empty();
+                    $("#recipeSelect").append('<option value="" selected disabled>Select a recipe</option>'); // need to have a default.
+                    for(var i = 0; i < response.recipes.length; ++i){
+                        if (RecipeValidator.isValid(response.recipes[i].instructions)) {
+                            var formattedName = response.recipes[i].name + ((response.recipes[i].isDefault) ? " (preset)" : "");
+                            $("#recipeSelect").append('<option value="'
+                                                      + JSON.stringify({ name: response.recipes[i].name, isDefault: response.recipes[i].isDefault })
+                                                      + '">'
+                                                      + formattedName
+                                                      + '</option>');
+                        }
+                   }
                } else {
                     // handle error response.
                }
