@@ -1,6 +1,6 @@
 var app = {
     
-    server: 'http://192.168.1.35:8080',
+    server: 'http://cooksmart.ddns.net:8080',
     deviceConnected: false,
     
     initialize: function() {
@@ -23,6 +23,7 @@ var app = {
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
         app.connectToDevice();
+        app.getRecipes();
     },
     
     connectToDevice: function() {
@@ -42,6 +43,9 @@ var app = {
                         } 
                     } else {
                         app.deviceConnected = false;
+                        $('#ConnectingToHub').show();
+                        $('#ConnectedToHub').hide();
+                        
                     }
                     setTimeout(app.connectToDevice, 10000);
                 }
@@ -53,7 +57,7 @@ var app = {
         $('#ConnectingToHub').hide();
         $('#ConnectedToHub').show();
         app.updateDeviceStatus();
-        app.getRecipes();
+        $("#device-status-text").text("Device status: unknown");
     },
     
     isLoggedIn: function() {
@@ -78,7 +82,7 @@ var app = {
                    $("#device-status-text").text("Device status: " + response.deviceStatus);
                    var buttonProperties = {
                        text: (response.deviceStatus === 'idling') ? "Load Recipe" : "Stop",
-                       onClick: (response.deviceStatus === 'idle') ? app.openLoadRecipeModal : app.stopDevice
+                       onClick: (response.deviceStatus === 'idling') ? app.openLoadRecipeModal : app.stopDevice
                    };
                    $("#startCooking").text(buttonProperties.text);
                    $("#startCooking").on('click', buttonProperties.onClick);
@@ -97,18 +101,22 @@ var app = {
             data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: "" }),
             success: function(response) {
                 if (response.status === "ok") {
+                    localStorage.removeItem('recipes');
                     $("#recipeSelect").empty();
                     $("#recipeSelect").append('<option value="" selected disabled>Select a recipe</option>'); // need to have a default.
+                    var recipes = [];
                     for(var i = 0; i < response.recipes.length; ++i){
                         if (RecipeValidator.isValid(response.recipes[i].instructions)) {
                             var formattedName = response.recipes[i].name + ((response.recipes[i].isDefault) ? " (preset)" : "");
                             $("#recipeSelect").append('<option value="'
-                                                      + JSON.stringify({ name: response.recipes[i].name, isDefault: response.recipes[i].isDefault })
+                                                      + formattedName
                                                       + '">'
                                                       + formattedName
                                                       + '</option>');
+                            recipes.push({ name: formattedName, instructions: response.recipes[i].instructions });
                         }
                    }
+                   localStorage.setItem('recipes', JSON.stringify(recipes));
                } else {
                     // handle error response.
                }

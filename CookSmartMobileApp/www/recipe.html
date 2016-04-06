@@ -45,20 +45,76 @@
     </style>
 
     <body>
-    <div class="header">
-            <p class='header-text cooksmart-header'>CookSmart</p>
-    </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="recipe.html">Cook Book</a></li>
+            <li><a href="status.html">Status</a></li>
+            <li><a href="#settings">Settings</a></li>
+        </ul>
     
-    
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a class="active" href="recipe.html">Cook Book</a></li>
-        <li><a href="status.html">Status</a></li>
-        <li><a href="#settings">Settings</a></li>
-    </ul>
-        <body>
-            <div class="header">
-                <p class='header-text cooksmart-header'>CookSmart CookBook</p>
+        <div class="header">
+            <p class='header-text cooksmart-header'>CookSmart CookBook</p>
+        </div>
+        
+        <div class='recipe-buttons-container'>
+            <button id='addRecipe' class='recipe-button'><span class='glyphicon glyphicon-plus'></span></button>
+        </div>
+        
+        <div class='recipe-row-container'>
+        </div>
+        
+        <div class='modal'>
+            <div class="modal-content">
+                <span class="close">×</span>
+                <div class='instruction-row'>
+                    <input placeholder='minutes' type='text' style="width: 25%;">
+                    <select style="width: 20%;">
+                        <option value="" selected disabled>Heat</option>
+                        <option value='Off'>Off</option>
+                        <option value='Low'>Low</option>
+                        <option value='Med-Low'>Med-Low</option>
+                        <option value='Med'>Med</option>
+                        <option value='Med-High'>Med-High</option>
+                        <option value="High">High</option>
+                    </select>
+                    <select multiple style="width: 35%;">
+                        <option value="" selected disabled>Cartridges</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <select style="width: 25%;">
+                        <option value="" selected disabled>Water</option>
+                        <option value='0'>None</option>
+                        <option value='0.125'>1/8 cup</option>
+                        <option value='0.25'>1/4 cup</option>
+                        <option value='0.5'>1/2 cup</option>
+                        <option value='0.75'>3/4 cup</option>
+                        <option value='1'>1 cup</option>
+                        <option value="1.5">1 1/2 cups</option>
+                        <option value="2">2 cups</option>
+                        <option value="2.5">2 1/2 cup</option>
+                        <option value="3">3 cups</option>
+                        <option value="3.5">3 1/2 cups</option>
+                        <option value="4">4 cups</option>
+                    </select>
+                    <span>stir:</span><input type=checkbox>                    
+                </div>
+                <button id='addInstructionButton'>Add instruction</button>
+                <button>save</button>
             </div>
-            <p>List of recipes here</p>
+        </div>
+        
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/RecipePage.js"></script>
     </body>
