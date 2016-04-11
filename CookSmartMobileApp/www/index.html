@@ -45,25 +45,33 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Refresh Button (always visable) -->
-        <div class="refresh-button-container">
-            <span id='refreshButton' class='glyphicon glyphicon-refresh'></span>
-        </div>
             
         <!-- Home Page Content -->
         <div class="Page" id="Home">
-            <button id="startCooking" class="cooknow-button">
-                Start/Stop Cooking
+            
+            <div class='recipe-buttons-container'>
+                <button id='addRecipe'><span class='glyphicon glyphicon-plus'></span></button>
+            </div>
+             
+            <button class='status-button'>
+                <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
             </button>
-                
+            
+            <div class='device-status-container'>
+                <p id="device-status-text">status: unknown</p>
+            </div>            
+            
             <select id="recipeSelect" class="currentRecipe-button">
                 <option value="" selected disabled>Select a recipe</option>
             </select>
             
-            <div class='device-status-container'>
-                <p id="device-status-text">status: unknown</p>
-            </div> 
+            <button id="startCooking" class="cooknow-button">
+                Start/Stop Cooking
+            </button>
+            
+            <div class="refresh-button-container">
+                <span id='refreshButton' class='glyphicon glyphicon-refresh'></span>
+            </div>
         </div>
         
         <!-- Recipe's Page Content -->
