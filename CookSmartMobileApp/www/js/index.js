@@ -23,11 +23,11 @@ var app = {
         $("#ConnectedToHub").hide();
         $("#startCooking").on('click', function() { onStartCooking});
         app.connectToDevice();
-        app.getRecipes();
+        app.getRecipes(); 
     },
     
     connectToDevice: function() {
-        if (JSON.parse(localStorage.getItem('user')).deviceId == null) {
+        if (localStorage.getItem('user') == null || !localStorage.getItem('user').hasOwnProperty('deviceId') || JSON.parse(localStorage.getItem('user')).deviceId == null) {
             setTimeout(app.connectToDevice, 10000);
         } else {
             $.ajax({
@@ -128,17 +128,4 @@ var app = {
         var buttonDiameter = $(".refresh-button-container").width();
         $(".refresh-button-container").css({height: buttonDiameter + "px"});
     },
-    
-    /*
-    drawMenuButton: function() {
-        var buttonDiameter = $(".menu-selection-container").width();
-        $(".menu-selection-container").css({height: buttonDiameter + "px"});
-    },
-    */
-    onStartCooking: function() {
-        alert('Cooking has Now Begun.');
-    }
-};
-
-
-
+}

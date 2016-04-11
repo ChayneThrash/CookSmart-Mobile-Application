@@ -20,11 +20,6 @@ RecipeValidator = {
             && instruction.hasOwnProperty('waterAmount')
             && this.timeFieldValid(instruction.time)
             && this.heatFieldValid(instruction.heat)
-            &&
-            (   // This logic is to ensure that time is only supplied if heating or stirring. It should be zero otherwise.
-                ((instruction.heat !== 'Off' || !instruction.stir) && instruction.time > 0)
-             || (instruction.heat === 'Off' && !instruction.stir && instruction.time === 0)
-            )
             && this.cartridgesFieldValid(instruction.cartridges)
             && this.waterAmountFieldValid(instruction.waterAmount);
     },
@@ -33,7 +28,7 @@ RecipeValidator = {
         var minTimeSec = 15;
         var maxTimeSec = 14400; //4 hours
         
-        return time >= 0
+        return time >= minTimeSec
             && time <= maxTimeSec
             && (time % minTimeSec) === 0; 
     },
@@ -57,7 +52,7 @@ RecipeValidator = {
     },
     
     waterAmountFieldValid: function(waterAmount) {
-        var minAmount = 0; // 8th of a cup
+        var minAmount = 1; // 8th of a cup
         var maxAmount = 32; // 4 cups
         return waterAmount >= minAmount
             && waterAmount <= maxAmount;

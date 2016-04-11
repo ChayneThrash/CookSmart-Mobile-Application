@@ -11,40 +11,26 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/index.css">
         <title>CookSmart Home</title>
+        <script>
+            function changeDisplay(a){
+                if (a == 1) {
+                    document.getElementById("Recipe").style.display = "none";
+                    document.getElementById("Settings").style.display = "none";
+                    document.getElementById("Home").style.display = "block";
+                }
+                else if (a == 2) {
+                    document.getElementById("Recipe").style.display = "block";
+                    document.getElementById("Settings").style.display = "none";
+                    document.getElementById("Home").style.display = "none";
+                }
+                else{
+                    document.getElementById("Recipe").style.display = "none";
+                    document.getElementById("Settings").style.display = "block";
+                    document.getElementById("Home").style.display = "none";
+                }
+            }
+        </script>
         
-        <style>
-            ul{
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #287FCC;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-            }
-            
-            li {
-                float: left;
-                border-right: 1px solid white;
-                
-            }
-            li:last-child {
-                border-right: none;
-            }
-
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-            li a:hover {
-                background-color: #7BBDF7;
-            }
-        </style>
     </head>
     <body>
         <div class="header">
@@ -68,6 +54,7 @@
             <span id='refreshButton' class='glyphicon glyphicon-refresh'></span>
         </div>
         
+
         <button id="startCooking" class="cooknow-button">
             Start Cooking
         </button>
@@ -79,13 +66,67 @@
         <button class='status-button'>
             <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
         </button> 
+
+        <!--Page <div>'s begin here -->
         
-        <ul>
-            <li><a class="active" href="index.html">Home</a></li>
-            <li><a href="recipe.html">Cook Book</a></li>
-            <li><a href="status.html">Status</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
+        <div class="Page" id="Home">
+            <button class="cooknow-button" id="startCooking">
+                <p>Start/Stop Cooking</p>
+            </button>
+                
+            <button class="currentRecipe-button" id="recipe" onclick="recipe()">
+                <p>Current Recipe</p>
+            </button>
+            
+            <button class="status-button" id="status">
+                <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
+            </button> 
+        </div>
+        
+        <div class="Page" id="Recipe" style="display: none">
+            <button class="cooknow-button" id="recipes">
+                <p>Recipes</p>
+            </button>
+            
+            <button class="addRecipe-button" id="addRecipe">
+                <p>New Recipe</p>
+            </button>
+        </div>
+
+        <div class="settingsPage" id="Settings" style="display: none">
+            <button class="cooknow-button" id="wifi">
+                <p>Wireless Information</p>
+            </button>
+            
+            <button class="cooknow-button" id="logout">
+                <p>Logout</p>
+            </button>
+            
+            <button class="password-button" id="password">
+                <p>Change Password</p>
+            </button>
+            
+            <button class="cooknow-button" id="staticIP">
+                <p>Static IP Address</p>
+            </button>
+            
+            <button class="cooknow-button" id="serialCode">
+                <p>Input Serial Code</p>
+            </button>
+        </div>
+        <!-- Page <div>'s end here -->
+        
+        <div class="menuBar" id="menuBar">
+            <button class="menuBar-home-button" id="menuHome" onclick="changeDisplay(1)">
+                <p>Home</p>
+            </button>
+            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeDisplay(2)">
+                <p>Recipe's</p>
+            </button>
+            <button class="menuBar-settings-button" id="menuSettings" onclick="changeDisplay(3)">
+                <p>Settings</p>
+            </button>
+        </div>
         
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -99,5 +140,6 @@
         <script type="text/javascript">
             app.initialize();
         </script>
+        <script type="text/javascript" src="js/menuBar.js"</script>
     </body>
 </html>

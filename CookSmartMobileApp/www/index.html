@@ -11,40 +11,26 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/index.css">
         <title>CookSmart Home</title>
+        <script>
+            function changeDisplay(a){
+                if (a == 1) {
+                    document.getElementById("Recipe").style.display = "none";
+                    document.getElementById("Settings").style.display = "none";
+                    document.getElementById("Home").style.display = "block";
+                }
+                else if (a == 2) {
+                    document.getElementById("Recipe").style.display = "block";
+                    document.getElementById("Settings").style.display = "none";
+                    document.getElementById("Home").style.display = "none";
+                }
+                else{
+                    document.getElementById("Recipe").style.display = "none";
+                    document.getElementById("Settings").style.display = "block";
+                    document.getElementById("Home").style.display = "none";
+                }
+            }
+        </script>
         
-        <style>
-            ul{
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: #287FCC;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-            }
-            
-            li {
-                float: left;
-                border-right: 1px solid white;
-                
-            }
-            li:last-child {
-                border-right: none;
-            }
-
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-            li a:hover {
-                background-color: #7BBDF7;
-            }
-        </style>
     </head>
     <body>
         <div class="header">
@@ -60,33 +46,166 @@
             </div>
         </div>
         
-        <div class='device-status-container'>
-            <p id="device-status-text">status: unknown</p>
-        </div>
-        
+        <!-- Refresh Button (always visable) -->
         <div class="refresh-button-container">
             <span id='refreshButton' class='glyphicon glyphicon-refresh'></span>
         </div>
-        
-        <button id="startCooking" class="cooknow-button">
-            Start Cooking
-        </button>
             
-        <select id="recipeSelect" class="currentRecipe-button">
-            <option value="" selected disabled>Select a recipe</option>
-        </select>
+        <!-- Home Page Content -->
+        <div class="Page" id="Home">
+            <button id="startCooking" class="cooknow-button">
+                Start/Stop Cooking
+            </button>
+                
+            <select id="recipeSelect" class="currentRecipe-button">
+                <option value="" selected disabled>Select a recipe</option>
+            </select>
+            
+            <div class='device-status-container'>
+                <p id="device-status-text">status: unknown</p>
+            </div> 
+        </div>
         
-        <button class='status-button'>
-            <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
-        </button> 
+        <!-- Recipe's Page Content -->
+        <div class="Page" id="Recipe" style="display: none">
+            <button class="recipe-button" id="recipes">
+                Recipes
+            </button>
+            
+            <div class='recipe-buttons-container'>
+                <button id='addRecipe'><span class='glyphicon glyphicon-plus'></span></button>
+            </div>
         
-        <ul>
-            <li><a class="active" href="index.html">Home</a></li>
-            <li><a href="recipe.html">Cook Book</a></li>
-            <li><a href="status.html">Status</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
+            <div class='recipe-row-container'>
+            </div>
+        </div>
         
+        <!-- Settings Page Content -->
+        <div class="settingsPage" id="Settings" style="display: none">
+            <button class="wifi-button" id="wifi" onclick="wifiModal()">
+                Wireless Information
+            </button>
+            
+            <button class="logout-button" id="logout">
+                Logout
+            </button>
+            
+            <button class="password-button" id="password">
+                Change Password
+            </button>
+            
+            <button class="ipAdress" id="staticIP">
+                Static IP Address
+            </button>
+            <input id="setup" placeholder='Serial Code' type="text" style="width: 75%";>
+                <button class="serialCode" id="serialCode">
+                    Input Serial Code
+                </button>
+            </input>
+        </div>
+        <!-- End Settings Page -->
+        
+        
+        <!-- Menu Bar Content -->
+        <div class="menuBar" id="menuBar">
+            <button class="menuBar-home-button" id="menuHome" onclick="changeDisplay(1)">
+                <p>Home</p>
+            </button>
+            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeDisplay(2)">
+                <p>Recipe's</p>
+            </button>
+            <button class="menuBar-settings-button" id="menuSettings" onclick="changeDisplay(3)">
+                <p>Settings</p>
+            </button>
+        </div>
+        <!-- End Menu Bar -->
+        
+        <!-- The Modal -->
+        <div id="modal" class="modal">
+
+        <!-- Modal content -->
+            <div class="modal-content">
+        
+        <!-- Modal Header -->
+                <div class="modal-header">
+                        <h3>New Recipe<span class="close">×</span></h3>
+                        <h3><input placeholder='Recipe Name' type='text' style="width: 75%;"></h3>
+                    </div>
+        <!-- Modal Body -->
+                <div class="modal-body">
+                    <form action="action_page.php">
+                    <fieldset>
+                    <legend style="color: white";>Instruction Information:</legend>
+                    <input placeholder='minutes' type='text' style="width: 30%;">
+                    <select style="width: 40%;">
+                            <option value="" selected disabled>Heat</option>
+                            <option value='Off'>Off</option>
+                            <option value='Low'>Low</option>
+                            <option value='Med-Low'>Med-Low</option>
+                            <option value='Med'>Med</option>
+                            <option value='Med-High'>Med-High</option>
+                            <option value="High">High</option>
+                    </select>
+                    <br><br>
+                    <select multiple style="width: 35%;">
+                            <option value="" selected disabled>Cartridges</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                            <option value='5'>5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                    </select>
+                    <br><br>
+                    <select style="width: 35%;">
+                            <option value="" selected disabled>Water</option>
+                            <option value='0'>None</option>
+                            <option value='0.125'>1/8 cup</option>
+                            <option value='0.25'>1/4 cup</option>
+                            <option value='0.5'>1/2 cup</option>
+                            <option value='0.75'>3/4 cup</option>
+                            <option value='1'>1 cup</option>
+                            <option value="1.5">1 1/2 cups</option>
+                            <option value="2">2 cups</option>
+                            <option value="2.5">2 1/2 cup</option>
+                            <option value="3">3 cups</option>
+                            <option value="3.5">3 1/2 cups</option>
+                            <option value="4">4 cups</option>
+                    </select>
+                    <span>stir:</span><input type=checkbox>
+                    <br><br>
+                    <button id='addInstructionButton'>Add instruction</button>
+                    <button>save</button>
+                    </fieldset>
+                    </form>
+                    </div>
+        <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <h3>Recipe Builder</h3>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Wifi Modal 
+            <div id="wifiModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Wireless Information <span class="close">×</span></h3>    
+                    </div>
+                    <div class="modal-body">
+                        <input placeholder='Static IP address' type='text' style="width: 30%;">
+                    </div>
+                    <div class="modal-header"></div>
+                </div>
+            </div>
+        -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
@@ -99,5 +218,27 @@
         <script type="text/javascript">
             app.initialize();
         </script>
+        <script type="text/javascript" src="js/menuBar.js"></script>
+        <script type="text/javascript" src="js/RecipePage.js"></script>
+        <script>
+            /*function modal() {
+                $("#addRecipe").on('click', function() {
+                $(".modal").show();
+                });
+                $(".close").on('click', function() {
+                $(".modal").hide(); 
+                });
+                $("#addInstructionButton", addInstructionRow);
+                var recipes = JSON.parse(localStorage.getItem('recipes'));
+                if (recipes) {
+                    for (var i = 0; i < recipes.length; ++i) {
+                        $(".recipe-row-container").append("<div class='recipe-row'><a class='recipe-name-link'>"
+                                                    + recipes[i].name
+                                                    + "</a></div>");
+                    }
+                }
+            };*/
+        </script>
+        
     </body>
 </html>
