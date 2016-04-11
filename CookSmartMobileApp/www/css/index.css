@@ -67,7 +67,7 @@ html, body {
     margin-left: 5%;
     margin-left: 5%;
 }
-
+/*********************************
 .menu-selection-container {
     position: fixed;
     width: 9%;
@@ -75,6 +75,8 @@ html, body {
     right: 12%;
     bottom: 8%;
 }
+**********************************/
+
 .cooknow-button{
     background-color: #287FCC; /*blue same as header */
     border: double; 
@@ -235,6 +237,31 @@ html, body {
     -webkit-transition-duration: 0.4s; /* Safari */
 }
 
+.wifi-button{
+    background-color: #287FCC; /*blue same as header */
+    border: double; 
+    color: white;
+    padding: 16px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-size: x-large;
+    margin: 0px 0px;
+    cursor: pointer;
+    position: fixed;
+    top: 50%;
+    left: 4%;
+    height: 11%;
+    width: 90%;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
+}
+.wifi-button:hover{
+    background-color: #7BBDF7; /* lighter blue */
+    color: white;
+}
+
 .password-button{
     background-color: #287FCC; /*blue same as header */
     border: double; 
@@ -260,7 +287,7 @@ html, body {
     color: white;
 }
 
-.addRecipe-button{
+.logout-button{
     background-color: #287FCC; /*blue same as header */
     border: double; 
     color: white;
@@ -273,20 +300,34 @@ html, body {
     margin: 0px 0px;
     cursor: pointer;
     position: fixed;
-    top: 65%;
+    top: 80%;
     left: 4%;
     height: 11%;
-    width: 90%;
+    width: 45%;
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
 }
-.addRecipe-button:hover{
+.logout-button:hover{
     background-color: #7BBDF7; /* lighter blue */
     color: white;
 }
+.addRecipe{
+    position: fixed;
+    top: 20%;
+    right: 7%; 
+}
+.addRecipe-button:hover{
+    background-color: #7BBDF7;
+    color: white;
+}
+.recipe-buttons-container{
+    position: fixed;
+    top:19%;
+    right: 10%;
+}
 
-.recipe-button{
-    background-color: #287FCC; /*blue same as header */
+.recipe-button {
+    background-color: #287FCC;
     border: double; 
     color: white;
     padding: 16px 0px;
@@ -298,33 +339,16 @@ html, body {
     margin: 0px 0px;
     cursor: pointer;
     position: fixed;
-    top: 65%;
+    top: 16%;
     left: 4%;
     height: 11%;
     width: 90%;
     transition-duration: 0.4s;
     -webkit-transition-duration: 0.4s; /* Safari */
 }
-
-.wifi-button{
-    background-color: #287FCC; /*blue same as header */
-    border: double; 
+.recipe-button:hover{
+    background-color: #7BBDF7;
     color: white;
-    padding: 16px 0px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-family: inherit;
-    font-size: x-large;
-    margin: 0px 0px;
-    cursor: pointer;
-    position: fixed;
-    top: 65%;
-    left: 4%;
-    height: 11%;
-    width: 90%;
-    transition-duration: 0.4s;
-    -webkit-transition-duration: 0.4s; /* Safari */
 }
 
 .modal{
@@ -344,7 +368,7 @@ html, body {
 .modal-content{
     position: relative;
     background-color: #7BBDF7;
-    color: white;
+    color: black;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
@@ -392,4 +416,5 @@ html, body {
     padding: 2px 16px;
     background-color: #287FCC;
     color: white;
+    text-align: left;
 }
