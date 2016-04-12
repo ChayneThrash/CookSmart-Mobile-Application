@@ -337,7 +337,7 @@ html, body {
 }
 .recipe-buttons-container{
     position: fixed;
-    top:19%;
+    top:10%;
     right: 10%;
 }
 
@@ -432,4 +432,9 @@ html, body {
     background-color: #287FCC;
     color: white;
     text-align: left;
+}
+ 
+.add-recipe-button {
+    height: 100%;
+    width: 100%;
 }

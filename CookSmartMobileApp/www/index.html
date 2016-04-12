@@ -76,12 +76,9 @@
         
         <!-- Recipe's Page Content -->
         <div class="Page" id="Recipe" style="display: none">
-            <button class="recipe-button" id="recipes">
-                Recipes
-            </button>
             
             <div class='recipe-buttons-container'>
-                <button id='addRecipe'><span class='glyphicon glyphicon-plus'></span></button>
+                <button id='addRecipe' class='add-recipe-button'><span class='glyphicon glyphicon-plus'></span></button>
             </div>
         
             <div class='recipe-row-container'>
@@ -120,7 +117,7 @@
                 <p>Home</p>
             </button>
             <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeDisplay(2)">
-                <p>Recipe's</p>
+                <p>Recipes</p>
             </button>
             <button class="menuBar-settings-button" id="menuSettings" onclick="changeDisplay(3)">
                 <p>Settings</p>
@@ -136,12 +133,11 @@
         
         <!-- Modal Header -->
                 <div class="modal-header">
-                        <h3>New Recipe<span class="close">×</span></h3>
-                        <h3><input placeholder='Recipe Name' type='text' style="width: 75%;"></h3>
-                    </div>
+                    <h3>New Recipe<span class="close">×</span></h3>
+                    <h3><input placeholder='Recipe Name' type='text' style="width: 75%;"></h3>
+                </div>
         <!-- Modal Body -->
                 <div class="modal-body">
-                    <form action="action_page.php">
                     <fieldset>
                     <legend style="color: white";>Instruction Information:</legend>
                     <input placeholder='minutes' type='text' style="width: 30%;">

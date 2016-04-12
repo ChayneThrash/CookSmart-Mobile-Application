@@ -1,6 +1,6 @@
 RecipeValidator = {
 
-	    isValid: function(recipe) {
+	isValid: function(recipe) {
         if (recipe.length === 0) {
             return false;
         }
