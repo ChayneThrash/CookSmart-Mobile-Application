@@ -1,6 +1,6 @@
 var app = {
     
-    server: 'http://cooksmart.ddns.net:8080',
+    server: 'http://cooksmart.ddns.net:8332',
     deviceConnected: false,
     
     initialize: function() {
@@ -27,7 +27,7 @@ var app = {
     },
     
     connectToDevice: function() {
-        if (localStorage.getItem('user') == null || !localStorage.getItem('user').hasOwnProperty('deviceId') || JSON.parse(localStorage.getItem('user')).deviceId == null) {
+        if (localStorage.getItem('user') == null || !JSON.parse(localStorage.getItem('user')).hasOwnProperty('deviceId') || JSON.parse(localStorage.getItem('user')).deviceId == null) {
             setTimeout(app.connectToDevice, 10000);
         } else {
             $.ajax({

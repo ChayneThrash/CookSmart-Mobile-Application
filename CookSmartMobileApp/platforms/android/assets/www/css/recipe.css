@@ -50,10 +50,10 @@ html, body {
     padding-bottom: 10px;
 }
 
-.recipe-buttons-container {
-    position: relative;
-    height: 7%;
-    width: 100%;
+.recipe-buttons-container{
+    position: fixed;
+    top:8%;
+    right: 10%;
 }
 
 .recipe-button {

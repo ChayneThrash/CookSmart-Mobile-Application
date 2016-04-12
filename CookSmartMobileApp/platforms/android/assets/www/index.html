@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/recipe.css">
         <title>CookSmart Home</title>
         <script>
             function changeDisplay(a){
@@ -29,6 +30,12 @@
                     document.getElementById("Home").style.display = "none";
                 }
             }
+            
+            function changeRecipeDisplay() {
+                RecipePage.onPageLoad();
+                changeDisplay(2);
+            }
+            
         </script>
         
     </head>
@@ -48,10 +55,6 @@
             
         <!-- Home Page Content -->
         <div class="Page" id="Home">
-            
-            <div class='recipe-buttons-container'>
-                <button id='addRecipe'><span class='glyphicon glyphicon-plus'></span></button>
-            </div>
              
             <button class='status-button'>
                 <img src="img/CookSmart.png" style="display: inline-block; padding: 1px 1px 1px; height: 100%; width: 100%;">
@@ -77,9 +80,9 @@
         <!-- Recipe's Page Content -->
         <div class="Page" id="Recipe" style="display: none">
             
-            <div class='recipe-buttons-container'>
-                <button id='addRecipe' class='add-recipe-button'><span class='glyphicon glyphicon-plus'></span></button>
-            </div>
+            <button id='addRecipe' class='recipe-buttons-container add-recipe-button'>
+                <span class='glyphicon glyphicon-plus'></span>
+            </button>
         
             <div class='recipe-row-container'>
             </div>
@@ -116,7 +119,7 @@
             <button class="menuBar-home-button" id="menuHome" onclick="changeDisplay(1)">
                 <p>Home</p>
             </button>
-            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeDisplay(2)">
+            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeRecipeDisplay()">
                 <p>Recipes</p>
             </button>
             <button class="menuBar-settings-button" id="menuSettings" onclick="changeDisplay(3)">
@@ -218,12 +221,12 @@
         <script type="text/javascript" src="js/uuid.js"></script>
         <script type="text/javascript" src="js/sessions.js"></script>
         <script type="text/javascript" src="js/RecipeValidator.js"></script>
+        <script type="text/javascript" src="js/RecipePage.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
         <script type="text/javascript" src="js/menuBar.js"></script>
-        <script type="text/javascript" src="js/RecipePage.js"></script>
         <script>
             /*function modal() {
                 $("#addRecipe").on('click', function() {

@@ -10,6 +10,7 @@ var RecipePage = {
            $(".modal").hide(); 
         });
         var recipes = JSON.parse(localStorage.getItem('recipes'));
+        $(".recipe-row-container").empty();
         if (recipes) {
             for (var i = 0; i < recipes.length; ++i) {
                 $(".recipe-row-container").append("<div class='recipe-row'><a class='recipe-name-link'>"
