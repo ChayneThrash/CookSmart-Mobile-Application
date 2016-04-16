@@ -137,7 +137,7 @@
         <!-- Modal Header -->
                 <div class="modal-header">
                     <h3>New Recipe<span class="close">×</span></h3>
-                    <h3><input placeholder='Recipe Name' type='text' style="width: 75%;"></h3>
+                    <input id='newRecipeName' placeholder='Recipe Name' type='text' style="width: 75%; color: black;">
                 </div>
         <!-- Modal Body -->
                 <div class="modal-body">
@@ -154,8 +154,8 @@
                             <option value="High">High</option>
                     </select>
                     <br><br>
+                    <span>Cartridges</span>
                     <select multiple style="width: 35%;">
-                            <option value="" selected disabled>Cartridges</option>
                             <option value='1'>1</option>
                             <option value='2'>2</option>
                             <option value='3'>3</option>
@@ -187,10 +187,11 @@
                     </select>
                     <span>stir:</span><input type=checkbox>
                     <br><br>
-                    <button id='addInstructionButton'>Add instruction</button>
-                    <button>save</button>
                     </fieldset>
-                    </form>
+                    </div>
+                    <div>
+                        <button id='addInstructionButton' type='button'>Add instruction</button>
+                        <button id='saveRecipeButton' type='submit'>save</button>
                     </div>
         <!-- Modal Footer -->
                 <div class="modal-footer">
@@ -221,6 +222,8 @@
         <script type="text/javascript" src="js/uuid.js"></script>
         <script type="text/javascript" src="js/sessions.js"></script>
         <script type="text/javascript" src="js/RecipeValidator.js"></script>
+        <script type="text/javascript" src="js/Settings.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
         <script type="text/javascript" src="js/RecipePage.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">

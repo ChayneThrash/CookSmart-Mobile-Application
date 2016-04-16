@@ -18,7 +18,7 @@ var login = {
             createAccount: login.createAccountToggledOn
         };
         $.ajax({
-            url: "http://cooksmart.ddns.net:8332/Login",
+            url: Settings.server + "/Login",
             type: "POST",
             data: JSON.stringify(params),
             contentType: "application/json; charset=utf-8",
