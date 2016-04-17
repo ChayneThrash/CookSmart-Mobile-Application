@@ -52,6 +52,9 @@ var app = {
                         $("#device-status-text").text("Device status: unknown");
                     }
                     setTimeout(app.connectToDevice, 10000);
+                },
+                error: function(err) {
+                    setTimeout(app.connectToDevice, 10000);
                 }
             }); 
         }

@@ -361,7 +361,7 @@ html, body {
     color: white;
 }
 
-.modal{
+.device-modal{
     display: none;
     position: fixed;
     z-index: 1;
@@ -375,7 +375,7 @@ html, body {
     background-color: rgba(117,190,255,0.4);
 }
 
-.modal-content{
+.device-modal-content{
     position: relative;
     background-color: #7BBDF7;
     color: black;
@@ -400,29 +400,29 @@ html, body {
 }
 
 /* The Close Button */
-.modal-close {
+.device-modal-close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+.device-modal-close:hover,
+.device-modal-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header {
+.device-modal-header {
     padding: 2px 16px;
     background-color: #287FCC;
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.device-modal-body {padding: 2px 16px;}
 
-.modal-footer {
+.device-modal-footer {
     padding: 2px 16px;
     background-color: #287FCC;
     color: white;
