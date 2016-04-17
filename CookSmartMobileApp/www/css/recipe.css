@@ -50,6 +50,13 @@ html, body {
     padding-bottom: 10px;
 }
 
+.recipe-delete {
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 90%;
+}
+
 .recipe-buttons-container{
     position: fixed;
     top:8%;

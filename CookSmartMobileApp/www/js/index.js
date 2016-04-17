@@ -14,20 +14,22 @@ var app = {
         if (window.localStorage.getItem('user') == null) {
              window.location.href = "login.html";
         }
+        document.removeEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         app.drawRefreshButton();
+        app.onPageLoad();
+    },
+    
+    onPageLoad: function() {
         $(".list-header").off('click');
         $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
         $(".refresh-button-container").off('click');
-        $(".refresh-button-container").on('click', app.updateDeviceList);
-        $("#deviceListItem").off('click');
-        $("#deviceListItem").on('click', app.onDeviceSelection);
+        $(".refresh-button-container").on('click', app.updateDeviceStatus);
         $("#ConnectedToHub").hide();
         $("#startCooking").off('click');
-        $("#startCooking").on('click', function() { onStartCooking});
         $("#device-status-text").text("Device status: unknown");
         app.connectToDevice();
-        Util.getRecipes(); 
+        Util.getRecipes();        
     },
     
     connectToDevice: function() {
@@ -50,6 +52,7 @@ var app = {
                         $('#ConnectingToHub').show();
                         $('#ConnectedToHub').hide();
                         $("#device-status-text").text("Device status: unknown");
+                        app.setCookButtonProperties("unknown");
                     }
                     setTimeout(app.connectToDevice, 10000);
                 },
@@ -86,20 +89,16 @@ var app = {
             success: function(response) {
                 if (response.status === "ok") {
                     var status = app.decodeStatus(response.deviceStatus);
-                   $("#device-status-text").text("Device status: " + status);
-                   var buttonProperties = {
-                       text: (status === 'idling') ? "Load Recipe" : "Stop",
-                       onClick: (status === 'idling') ? app.loadRecipe : app.stopDevice
-                   };
-                   //$("#recipeSelect").prop('disabled', !(response.deviceStatus === 'idling'));
-                   $("#startCooking").text(buttonProperties.text);
-                   $("#startCooking").off('click');
-                   $("#startCooking").on('click', buttonProperties.onClick);
+                    $("#device-status-text").text("Device status: " + status);
+                    app.setCookButtonProperties(status);
                } else {
-                    // handle error response.
+                    app.setCookButtonProperties("unknown");
                }
+            },
+            error: function(err) {
+                app.setCookButtonProperties("unknown");
             }
-        });
+         });
     },
     
     loadRecipe: function() {
@@ -143,5 +142,27 @@ var app = {
             case 257: return "heating and stirring";
             default: return "unknown";
         }
+    },
+    
+    setCookButtonProperties: function(status) {
+        var buttonProperties = {};
+        switch (status) {
+            case "idling":
+                $("#startCooking").text("Load Recipe");
+                $("#startCooking").off('click');
+                $("#startCooking").on('click', app.loadRecipe);
+                break;
+            case "unknown": 
+                $("#startCooking").text("Start/Stop Cooking");
+                $("#startCooking").off('click');
+                $("#startCooking").on('click', buttonProperties.onClick);
+                break;
+            default:
+                $("#startCooking").text("Stop");
+                $("#startCooking").off('click');
+                $("#startCooking").on('click', app.stopDevice);
+                break;   
+        }
     }
+    
 }

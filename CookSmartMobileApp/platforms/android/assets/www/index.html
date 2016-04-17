@@ -15,6 +15,7 @@
         <script>
             function changeDisplay(a){
                 if (a == 1) {
+                    app.onPageLoad();
                     document.getElementById("Recipe").style.display = "none";
                     document.getElementById("Settings").style.display = "none";
                     document.getElementById("Home").style.display = "block";
@@ -99,7 +100,7 @@
                 Change Password
             </button>
             
-            <button class="serialInput-button" id="serialCode" onclick="modal()";>
+            <button class="serialInput-button" id="serialCode" onclick="deviceModal()";>
                 Input Serial Code
             </button>
            
@@ -236,9 +237,9 @@
                     <legend style="color: white";>Wireless Credentials</legend>
                     <input placeholder='SSID' id='SSIDTextBox' type='text' style="width: 70%;">
                     <br><br>
-                    <input placeholder='Wireless Password' id='PasswordTextBox' type='text' style="width: 75%;">
+                    <input placeholder='Wireless Password' id='WifiPasswordTextBox' type='text' style="width: 75%;">
                     <br><br>
-                    <button id='wifiSave' type='submit'>save</button>
+                    <button id='wifiSave'>save</button>
                 </div>
         <!-- wifi Modal Footer -->
                 <div class="wifi-modal-footer">
@@ -249,10 +250,10 @@
         <!-- End Wifi Modal -->
         
         <!-- Change Password Modal -->
-        <div id='password-modal' class='password-modal'>
+        <!--<div id='password-modal' class='password-modal'>-->
 
         <!-- password Modal content -->
-            <div class="password-modal-content">
+            <!--<div class="password-modal-content">-->
        
        
         <!-- End Change Password Modal -->
@@ -274,29 +275,25 @@
         <script type="text/javascript" src="js/menuBar.js"></script>
         <script type="text/javascript" src="js/SettingsPage.js"></script>
         <script>
-            function modal() {
-                $("#serialCode").on('click', function() {
+            function deviceModal() {
                 $(".device-modal").show();
-                });
                 $(".close").on('click', function() {
-                $(".device-modal").hide(); 
+                    $(".device-modal").hide(); 
                 });
             };
             function wifimodal() {
-                $("#wifi").on('click', function() {
                 $(".wifi-modal").show();
-                });
+                $(".close").off('click');
                 $(".close").on('click', function() {
-                $(".wifi-modal").hide(); 
+                    $(".wifi-modal").hide(); 
                 });
             };
             
             function passmodal() {
-                $("#password").on('click', function() {
                 $(".password-modal").show();
-                });
+                $(".close").off('click');
                 $(".close").on('click', function() {
-                $(".password-modal").hide(); 
+                    $(".password-modal").hide(); 
                 });
             };
         </script>

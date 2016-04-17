@@ -30,13 +30,15 @@ var RecipePage = {
         $(".recipe-row-container").empty();
         if (recipes) {
             for (var i = 0; i < recipes.length; ++i) {
-                $(".recipe-row-container").append("<div id='recipe-row' class='recipe-row'><a data-recipe-name='" + recipes[i].name + "' class='recipe-name-link'>"
+                var preset = /^.*\(preset\)$/.test(recipes[i].name);
+                $(".recipe-row-container").append("<div id='recipe-row' class='recipe-row' data-recipe-name='" + recipes[i].name + "'><a class='recipe-name-link'>"
                                                     + recipes[i].name
-                                                    + "</a></div>");
+                                                    + "</a>"
+                                                    + ((preset) ? "" : "<span class='glyphicon glyphicon-trash recipe-delete'></span></div>"));
             }
             $(".recipe-name-link").off('click');
             $(".recipe-name-link").on('click', function() {
-                var name = $(this).attr("data-recipe-name");
+                var name = $(this).parent().attr("data-recipe-name");
                 
                 RecipePage.editRecipe = true;
                 RecipePage.selectedRecipeName = name;
@@ -57,6 +59,13 @@ var RecipePage = {
                         $(".modal").show();
                         break;
                     }
+                }
+            });
+            $(".recipe-delete").off('click');
+            $(".recipe-delete").on('click', function() {
+                var name = $(this).parent().attr("data-recipe-name");
+                if (confirm("Are you sure want to delete this recipe?")) {
+                    RecipePage.deleteRecipe(name);
                 }
             });
         }
@@ -252,6 +261,24 @@ var RecipePage = {
         }
 
     },
+    
+    deleteRecipe: function(recipeName) {
+        $.ajax({
+            url: Settings.server + '/DeleteRecipe',
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ name: recipeName }),
+            success: function(response) {
+                if (response.status === "ok") {
+                    Util.getRecipes();
+                } else {
+                    alert ("failed to delete recipe.");
+                }
+            }, error: function (err) {
+                alert ("unable to reach server.");
+            }
+        });
+    }
     
 };
 

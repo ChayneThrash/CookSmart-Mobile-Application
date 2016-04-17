@@ -78,11 +78,7 @@ var Util = {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: { ssid: ssid, password: password } }),
             success: function(response) {
-                if (response.status === "ok") {
-                    alert('success');
-                } else {
-                    alert('an error occurred');
-                }
+                next(response);
             }
         });
     },
