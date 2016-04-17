@@ -15,17 +15,19 @@ html, body {
 }
 
 .device-status-container {
-    border: none;
+    border: double;
+    background-color: #287FCC;
     color: white;
-    padding: 0px 0px 0px;
+    padding: 16px 2px 16px;
     display: inline-block;
     margin: 0px 0px;
     cursor: pointer;
     position: fixed;
+    height: 11%;
     width: 90%;
-    top: 52%;
+    top: 53%;
     left: 4%;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
 
@@ -134,7 +136,7 @@ html, body {
     position: fixed;
     height: 11%;
     width: 90%;
-    top: 57%;
+    bottom: 27%;
     left: 4%;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -290,7 +292,7 @@ html, body {
     margin: 0px 0px;
     cursor: pointer;
     position: fixed;
-    top: 65%;
+    top: 35%;
     left: 4%;
     height: 11%;
     width: 90%;
@@ -361,7 +363,7 @@ html, body {
     color: white;
 }
 
-.modal{
+.device-modal{
     display: none;
     position: fixed;
     z-index: 1;
@@ -375,7 +377,7 @@ html, body {
     background-color: rgba(117,190,255,0.4);
 }
 
-.modal-content{
+.device-modal-content{
     position: relative;
     background-color: #7BBDF7;
     color: black;
@@ -400,29 +402,97 @@ html, body {
 }
 
 /* The Close Button */
-.modal-close {
+.device-modal-close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+.device-modal-close:hover,
+.device-modal-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header {
+.device-modal-header {
     padding: 2px 16px;
     background-color: #287FCC;
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.device-modal-body {padding: 2px 16px;}
 
-.modal-footer {
+.device-modal-footer {
+    padding: 2px 16px;
+    background-color: #287FCC;
+    color: white;
+    text-align: left;
+}
+
+.wifi-modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #75BEFF;
+    background-color: rgba(117,190,255,0.4);
+}
+
+.wifi-modal-content{
+    position: relative;
+    background-color: #7BBDF7;
+    color: black;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s   
+}
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.wifi-modal-close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.wifi-modal-close:hover,
+.wifi-modal-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.wifi-modal-header {
+    padding: 2px 16px;
+    background-color: #287FCC;
+    color: white;
+}
+
+.wifi-modal-body {padding: 2px 16px;}
+
+.wifi-modal-footer {
     padding: 2px 16px;
     background-color: #287FCC;
     color: white;

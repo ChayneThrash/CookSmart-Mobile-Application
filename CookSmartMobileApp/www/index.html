@@ -87,7 +87,7 @@
         
         <!-- Settings Page Content -->
         <div class="settingsPage" id="Settings" style="display: none">
-            <button id='wifi' class='wifi-button'>
+            <button id='wifi' class='wifi-button' onclick="wifimodal()";>
                 Wireless Information
             </button>
             
@@ -95,7 +95,7 @@
                 Logout
             </button>
             
-            <button class="password-button" id="password">
+            <button class="password-button" id="password" onclick="passmodal()">
                 Change Password
             </button>
             
@@ -210,6 +210,7 @@
                     <legend style="color: white";>Connect to Device</legend>
                     <input placeholder='Device Code' id='deviceIdTextBox' type='text' style="width: 70%;">
                     <button id='connectToDevice' type='submit'>save</button>
+                    <br><br>
                 </div>
         <!-- DevModal Footer -->
                 <div class="device-modal-footer">
@@ -219,19 +220,42 @@
         </div>
             
             
-        <!-- Wifi Modal 
-            <div id="wifiModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Wireless Information <span class="close">×</span></h3>    
-                    </div>
-                    <div class="modal-body">
-                        <input placeholder='Static IP address' type='text' style="width: 30%;">
-                    </div>
-                    <div class="modal-header"></div>
+        <!-- Wifi Modal -->
+        <div id='wifi-modal' class='wifi-modal'>
+
+        <!-- wifi Modal content -->
+            <div class="wifi-modal-content">
+        
+        <!-- wifi Modal Header -->
+                <div class="wifi-modal-header">
+                    <h3>Wireless Information<span class="close">×</span></h3>
+                </div>
+        <!-- wifi Modal Body -->
+                <div class="wifi-modal-body">
+                    <fieldset>
+                    <legend style="color: white";>Wireless Credentials</legend>
+                    <input placeholder='SSID' id='SSIDTextBox' type='text' style="width: 70%;">
+                    <br><br>
+                    <input placeholder='Wireless Password' id='PasswordTextBox' type='text' style="width: 75%;">
+                    <br><br>
+                    <button id='wifiSave' type='submit'>save</button>
+                </div>
+        <!-- wifi Modal Footer -->
+                <div class="wifi-modal-footer">
+                    <h3>Thanks and have a great day!</h3>
                 </div>
             </div>
-        -->
+        </div>
+        <!-- End Wifi Modal -->
+        
+        <!-- Change Password Modal -->
+        <div id='password-modal' class='password-modal'>
+
+        <!-- password Modal content -->
+            <div class="password-modal-content">
+       
+       
+        <!-- End Change Password Modal -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
@@ -256,6 +280,23 @@
                 });
                 $(".close").on('click', function() {
                 $(".device-modal").hide(); 
+                });
+            };
+            function wifimodal() {
+                $("#wifi").on('click', function() {
+                $(".wifi-modal").show();
+                });
+                $(".close").on('click', function() {
+                $(".wifi-modal").hide(); 
+                });
+            };
+            
+            function passmodal() {
+                $("#password").on('click', function() {
+                $(".password-modal").show();
+                });
+                $(".close").on('click', function() {
+                $(".password-modal").hide(); 
                 });
             };
         </script>

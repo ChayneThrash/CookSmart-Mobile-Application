@@ -215,34 +215,42 @@ var RecipePage = {
         
         if ($("#newRecipeName").val() == null || $("#newRecipeName").val().length === 0) {
             alert('recipe must have a name');
+        } else {
+            var instructions = [];
+            for (var i = 0; i < RecipePage.instructionCount; ++i) {
+                instructions.push(RecipePage.formatInstructionFromRow(i));
+            }
+            if (RecipeValidator.isValid(instructions)) {
+                if (RecipePage.editRecipe) {
+                    Util.editRecipe($("#newRecipeName").val(), RecipePage.selectedRecipeName, instructions, function(result){
+                        if (result) {
+                            Util.getRecipes();
+                            RecipePage.onPageLoad();
+                            $(".modal").hide();
+                        } else {
+                            alert("Failed to edit.");
+                        }
+                    });
+                } else {
+                    Util.addNewRecipe($("#newRecipeName").val(), instructions, function(result) {
+                        if (result) {
+                            Util.getRecipes();
+                            RecipePage.onPageLoad();
+                            $(".modal").hide();
+                        } else {
+                            alert("Failed to add.");
+                        }
+                    });
+                }
+            } else {
+                alert("invalid recipe");
+            }
         }
         var instructions = [];
         for(var i = 0; i < RecipePage.instructionCount; ++i) {
             instructions.push(RecipePage.formatInstructionFromRow(i));
         }
-        if (RecipeValidator.isValid(instructions)) {
-            if (RecipePage.editRecipe) {
-                Util.editRecipe($("#newRecipeName").val(), RecipePage.selectedRecipeName, instructions, function(result){
-                    if (result) {
-                        Util.getRecipes();
-                        RecipePage.onPageLoad();
-                        $(".modal").hide();
-                    } else {
-                        alert("Failed to edit.");
-                    }
-                });
-            } else {
-                Util.addNewRecipe($("#newRecipeName").val(), instructions, function(result) {
-                    if (result) {
-                        Util.getRecipes();
-                        RecipePage.onPageLoad();
-                        $(".modal").hide();
-                    } else {
-                        alert("Failed to add.");
-                    }
-                });
-            }
-        }
+
     },
     
 };

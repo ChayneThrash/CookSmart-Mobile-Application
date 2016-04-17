@@ -52,6 +52,9 @@ var app = {
                         $("#device-status-text").text("Device status: unknown");
                     }
                     setTimeout(app.connectToDevice, 10000);
+                },
+                error: function(err) {
+                    setTimeout(app.connectToDevice, 10000);
                 }
             }); 
         }
@@ -82,12 +85,13 @@ var app = {
             data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: "" }),
             success: function(response) {
                 if (response.status === "ok") {
-                   $("#device-status-text").text("Device status: " + response.deviceStatus);
+                    var status = app.decodeStatus(response.deviceStatus);
+                   $("#device-status-text").text("Device status: " + status);
                    var buttonProperties = {
-                       text: (response.deviceStatus === 'idling') ? "Load Recipe" : "Stop",
-                       onClick: (response.deviceStatus === 'idling') ? app.loadRecipe : app.stopDevice
+                       text: (status === 'idling') ? "Load Recipe" : "Stop",
+                       onClick: (status === 'idling') ? app.loadRecipe : app.stopDevice
                    };
-                   $("#recipeSelect").prop('disabled', !(response.deviceStatus === 'idling'));
+                   //$("#recipeSelect").prop('disabled', !(response.deviceStatus === 'idling'));
                    $("#startCooking").text(buttonProperties.text);
                    $("#startCooking").off('click');
                    $("#startCooking").on('click', buttonProperties.onClick);
@@ -104,7 +108,7 @@ var app = {
         if (recipes) {
             var name = $("#recipeSelect").val();
             for (var i = 0; i < recipes.length; ++i) {
-                if (recipes[i].name === name && RecipeValidator.isValid(recipes[i])) {
+                if (recipes[i].name === name && ReccipeValidator.isValid(recipes[i])) {
                     Util.loadRecipe(function(result){
                         app.updateDeviceStatus(); 
                     });
@@ -130,4 +134,14 @@ var app = {
         var buttonDiameter = $(".refresh-button-container").width();
         $(".refresh-button-container").css({height: buttonDiameter + "px"});
     },
+    
+    decodeStatus: function(status) {
+        switch (status) {
+            case 0: return "idling";
+            case 1: return "stirring";
+            case 256: return "heating";
+            case 257: return "heating and stirring";
+            default: return "unknown";
+        }
+    }
 }

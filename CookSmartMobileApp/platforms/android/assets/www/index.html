@@ -20,20 +20,17 @@
                     document.getElementById("Home").style.display = "block";
                 }
                 else if (a == 2) {
+                    RecipePage.onPageLoad();
                     document.getElementById("Recipe").style.display = "block";
                     document.getElementById("Settings").style.display = "none";
                     document.getElementById("Home").style.display = "none";
                 }
                 else{
+                    SettingsPage.onPageLoad();
                     document.getElementById("Recipe").style.display = "none";
                     document.getElementById("Settings").style.display = "block";
                     document.getElementById("Home").style.display = "none";
                 }
-            }
-            
-            function changeRecipeDisplay() {
-                RecipePage.onPageLoad();
-                changeDisplay(2);
             }
             
         </script>
@@ -90,7 +87,7 @@
         
         <!-- Settings Page Content -->
         <div class="settingsPage" id="Settings" style="display: none">
-            <button class="wifi-button" id="wifi" onclick="wifiModal()">
+            <button id='wifi' class='wifi-button' onclick="wifimodal()";>
                 Wireless Information
             </button>
             
@@ -98,18 +95,14 @@
                 Logout
             </button>
             
-            <button class="password-button" id="password">
+            <button class="password-button" id="password" onclick="passmodal()">
                 Change Password
             </button>
             
-            <button class="ipAdress" id="staticIP">
-                Static IP Address
+            <button class="serialInput-button" id="serialCode" onclick="modal()";>
+                Input Serial Code
             </button>
-            <input id="setup" placeholder='Serial Code' type="text" style="width: 75%";>
-                <button class="serialCode" id="serialCode">
-                    Input Serial Code
-                </button>
-            </input>
+           
         </div>
         <!-- End Settings Page -->
         
@@ -119,7 +112,7 @@
             <button class="menuBar-home-button" id="menuHome" onclick="changeDisplay(1)">
                 <p>Home</p>
             </button>
-            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeRecipeDisplay()">
+            <button class="menuBar-recipe-button" id="menuRecipe" onclick="changeDisplay(2)">
                 <p>Recipes</p>
             </button>
             <button class="menuBar-settings-button" id="menuSettings" onclick="changeDisplay(3)">
@@ -200,20 +193,69 @@
             </div>
         </div>
         <!-- End Modal -->
+        
+        <!-- Device Connect Modal -->
+        <div id="device-modal" class="device-modal">
 
-        <!-- Wifi Modal 
-            <div id="wifiModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Wireless Information <span class="close">×</span></h3>    
-                    </div>
-                    <div class="modal-body">
-                        <input placeholder='Static IP address' type='text' style="width: 30%;">
-                    </div>
-                    <div class="modal-header"></div>
+        <!-- DevModal content -->
+            <div class="device-modal-content">
+        
+        <!-- DevModal Header -->
+                <div class="device-modal-header">
+                    <h3>Device Connect<span class="close">×</span></h3>
+                </div>
+        <!-- DevModal Body -->
+                <div class="device-modal-body">
+                    <fieldset>
+                    <legend style="color: white";>Connect to Device</legend>
+                    <input placeholder='Device Code' id='deviceIdTextBox' type='text' style="width: 70%;">
+                    <button id='connectToDevice' type='submit'>save</button>
+                    <br><br>
+                </div>
+        <!-- DevModal Footer -->
+                <div class="device-modal-footer">
+                    <h3>Device Connect</h3>
                 </div>
             </div>
-        -->
+        </div>
+            
+            
+        <!-- Wifi Modal -->
+        <div id='wifi-modal' class='wifi-modal'>
+
+        <!-- wifi Modal content -->
+            <div class="wifi-modal-content">
+        
+        <!-- wifi Modal Header -->
+                <div class="wifi-modal-header">
+                    <h3>Wireless Information<span class="close">×</span></h3>
+                </div>
+        <!-- wifi Modal Body -->
+                <div class="wifi-modal-body">
+                    <fieldset>
+                    <legend style="color: white";>Wireless Credentials</legend>
+                    <input placeholder='SSID' id='SSIDTextBox' type='text' style="width: 70%;">
+                    <br><br>
+                    <input placeholder='Wireless Password' id='PasswordTextBox' type='text' style="width: 75%;">
+                    <br><br>
+                    <button id='wifiSave' type='submit'>save</button>
+                </div>
+        <!-- wifi Modal Footer -->
+                <div class="wifi-modal-footer">
+                    <h3>Thanks and have a great day!</h3>
+                </div>
+            </div>
+        </div>
+        <!-- End Wifi Modal -->
+        
+        <!-- Change Password Modal -->
+        <div id='password-modal' class='password-modal'>
+
+        <!-- password Modal content -->
+            <div class="password-modal-content">
+       
+       
+        <!-- End Change Password Modal -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
@@ -230,24 +272,33 @@
             app.initialize();
         </script>
         <script type="text/javascript" src="js/menuBar.js"></script>
+        <script type="text/javascript" src="js/SettingsPage.js"></script>
         <script>
-            /*function modal() {
-                $("#addRecipe").on('click', function() {
-                $(".modal").show();
+            function modal() {
+                $("#serialCode").on('click', function() {
+                $(".device-modal").show();
                 });
                 $(".close").on('click', function() {
-                $(".modal").hide(); 
+                $(".device-modal").hide(); 
                 });
-                $("#addInstructionButton", addInstructionRow);
-                var recipes = JSON.parse(localStorage.getItem('recipes'));
-                if (recipes) {
-                    for (var i = 0; i < recipes.length; ++i) {
-                        $(".recipe-row-container").append("<div class='recipe-row'><a class='recipe-name-link'>"
-                                                    + recipes[i].name
-                                                    + "</a></div>");
-                    }
-                }
-            };*/
+            };
+            function wifimodal() {
+                $("#wifi").on('click', function() {
+                $(".wifi-modal").show();
+                });
+                $(".close").on('click', function() {
+                $(".wifi-modal").hide(); 
+                });
+            };
+            
+            function passmodal() {
+                $("#password").on('click', function() {
+                $(".password-modal").show();
+                });
+                $(".close").on('click', function() {
+                $(".password-modal").hide(); 
+                });
+            };
         </script>
         
     </body>
