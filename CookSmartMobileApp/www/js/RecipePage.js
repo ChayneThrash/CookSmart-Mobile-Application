@@ -44,7 +44,7 @@ var RecipePage = {
                 RecipePage.selectedRecipeName = name;
                 
                 for (var i = 0; i < recipes.length; ++i) {
-                    if (recipes[i].name === name && RecipeValidator.isValid(recipes[i])) {
+                    if (recipes[i].name === name && RecipeValidator.isValid(recipes[i].instructions)) {
                         $(".modal-body").empty();
                         RecipePage.instructionCount = 0;
                         var isPreset = /^.*\(preset\)$/.test(recipes[i].name);
@@ -150,18 +150,18 @@ var RecipePage = {
         <br><br>\
         <span>Cartridges</span> \
         <select multiple id='cartridges-" + RecipePage.instructionCount + "' style='width: 35%;'> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='1'" + (($.inArray(1, instruction.cartridges) !== -1) ? " selected" : "") +">1</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='2'" + (($.inArray(2, instruction.cartridges) !== -1) ? " selected" : "") +">2</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='3'" + (($.inArray(3, instruction.cartridges) !== -1) ? " selected" : "") +">3</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='4'" + (($.inArray(4, instruction.cartridges) !== -1) ? " selected" : "") +">4</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='5'" + (($.inArray(5, instruction.cartridges) !== -1) ? " selected" : "") +">5</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='6'" + (($.inArray(6, instruction.cartridges) !== -1) ? " selected" : "") +">6</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='7'" + (($.inArray(7, instruction.cartridges) !== -1) ? " selected" : "") +">7</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='8'" + (($.inArray(8, instruction.cartridges) !== -1) ? " selected" : "") +">8</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='9'" + (($.inArray(9, instruction.cartridges) !== -1) ? " selected" : "") +">9</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='10'" + (($.inArray(10, instruction.cartridges) !== -1) ? " selected" : "") +">10</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='11'" + (($.inArray(11, instruction.cartridges) !== -1) ? " selected" : "") +">11</option> \
-            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='12'" + (($.inArray(12, instruction.cartridges) !== -1) ? " selected" : "") +">12</option> \ "
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='1'" + (($.inArray("1", instruction.cartridges) !== -1) ? " selected" : "") +">1</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='2'" + (($.inArray("2", instruction.cartridges) !== -1) ? " selected" : "") +">2</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='3'" + (($.inArray("3", instruction.cartridges) !== -1) ? " selected" : "") +">3</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='4'" + (($.inArray("4", instruction.cartridges) !== -1) ? " selected" : "") +">4</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='5'" + (($.inArray("5", instruction.cartridges) !== -1) ? " selected" : "") +">5</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='6'" + (($.inArray("6", instruction.cartridges) !== -1) ? " selected" : "") +">6</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='7'" + (($.inArray("7", instruction.cartridges) !== -1) ? " selected" : "") +">7</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='8'" + (($.inArray("8", instruction.cartridges) !== -1) ? " selected" : "") +">8</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='9'" + (($.inArray("9", instruction.cartridges) !== -1) ? " selected" : "") +">9</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='10'" + (($.inArray("10", instruction.cartridges) !== -1) ? " selected" : "") +">10</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='11'" + (($.inArray("11", instruction.cartridges) !== -1) ? " selected" : "") +">11</option> \
+            <option " + ((isPreset) ? "disabled='disabled'" : "") + " value='12'" + (($.inArray("12", instruction.cartridges) !== -1) ? " selected" : "") +">12</option> \ "
       +"</select> \
         <br><br>\
         <span>Water:</span> \

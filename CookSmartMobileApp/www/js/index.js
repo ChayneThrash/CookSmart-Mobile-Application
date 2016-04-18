@@ -16,19 +16,17 @@ var app = {
         }
         document.removeEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
         document.addEventListener("backbutton", function() { navigator.app.exitApp(); }, false);
+        $("#ConnectedToHub").hide();
+        $("#ConnectingToHub").show();
+        app.setCookButtonProperties('unknown');
         app.drawRefreshButton();
+        app.connectToDevice();
         app.onPageLoad();
     },
     
     onPageLoad: function() {
-        $(".list-header").off('click');
-        $(".list-header").on('click', function() { $(".device-list-container").toggle(); });
         $(".refresh-button-container").off('click');
         $(".refresh-button-container").on('click', app.updateDeviceStatus);
-        $("#ConnectedToHub").hide();
-        $("#startCooking").off('click');
-        $("#device-status-text").text("Device status: unknown");
-        app.connectToDevice();
         Util.getRecipes();        
     },
     
@@ -107,8 +105,8 @@ var app = {
         if (recipes) {
             var name = $("#recipeSelect").val();
             for (var i = 0; i < recipes.length; ++i) {
-                if (recipes[i].name === name && ReccipeValidator.isValid(recipes[i])) {
-                    Util.loadRecipe(function(result){
+                if (recipes[i].name === name && RecipeValidator.isValid(recipes[i].instructions)) {
+                    Util.loadRecipe(recipes[i], function(result){
                         app.updateDeviceStatus(); 
                     });
                     return;
@@ -135,17 +133,51 @@ var app = {
     },
     
     decodeStatus: function(status) {
-        switch (status) {
-            case 0: return "idling";
-            case 1: return "stirring";
-            case 256: return "heating";
-            case 257: return "heating and stirring";
-            default: return "unknown";
+        
+        if (status === 0) {
+            return "idling";
         }
+        
+        if (status === 0xFFFF) {
+            return unknown;
+        }
+        
+        var statuses = [];
+        if ((status & 0b00000001)) {
+            statuses.push("adding water");
+        }
+        if ((status & 0b00000010)) {
+            statuses.push("stirring");
+        }
+        if ((status & 0b00000100)){
+            statuses.push("heating");
+        }
+        if ((status & 0b00001000)) {
+            statuses.push("dropping a cartridge");
+        }
+        
+        if (statuses.length === 0) {
+            return "unknown";
+        }
+        
+        if (statuses.length === 1) {
+            return statuses[0];
+        }
+        
+        if (statuses.length === 2) {
+            return statuses[0] + " and " + statuses[1];
+        }
+        
+        var statusMsg = statuses[0];
+        for (var i = 1; i < (statuses.length -1); ++i) {
+            statusMsg += ", " + statuses[i];
+        }
+        
+        statusMsg += ", and " + statuses[(statuses.length - 1)];
+        return statusMsg;
     },
     
     setCookButtonProperties: function(status) {
-        var buttonProperties = {};
         switch (status) {
             case "idling":
                 $("#startCooking").text("Load Recipe");
@@ -155,7 +187,6 @@ var app = {
             case "unknown": 
                 $("#startCooking").text("Start/Stop Cooking");
                 $("#startCooking").off('click');
-                $("#startCooking").on('click', buttonProperties.onClick);
                 break;
             default:
                 $("#startCooking").text("Stop");

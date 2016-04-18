@@ -54,7 +54,7 @@ html, body {
     position: absolute;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 90%;
+    margin-left: 90%;
 }
 
 .recipe-buttons-container{

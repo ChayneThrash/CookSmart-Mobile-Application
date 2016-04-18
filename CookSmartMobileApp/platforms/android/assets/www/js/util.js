@@ -56,12 +56,12 @@ var Util = {
     },
     
     loadRecipe: function(recipe, next) {
-        if (RecipeValidator.isValid(recipe)) {
+        if (RecipeValidator.isValid(recipe.instructions)) {
             $.ajax({
                 url: Settings.server + '/LoadRecipe',
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: { recipe: recipe } }),
+                data: JSON.stringify({ deviceId: JSON.parse(localStorage.getItem('user')).deviceId, deviceParams: { recipe: recipe.instructions } }),
                 success: function(response) {
                     next(response.status === "ok");
                 }
