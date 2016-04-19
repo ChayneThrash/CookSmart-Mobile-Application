@@ -250,12 +250,33 @@
         <!-- End Wifi Modal -->
         
         <!-- Change Password Modal -->
-        <!--<div id='password-modal' class='password-modal'>-->
+        <div id='changepass-modal' class='changepass-modal'>
 
-        <!-- password Modal content -->
-            <!--<div class="password-modal-content">-->
-       
-       
+        <!-- Change Password Modal content -->
+            <div class="changepass-modal-content">
+        
+        <!-- Change Password Modal Header -->
+                <div class="changepass-modal-header">
+                    <h3>Change Password<span class="close">×</span></h3>
+                </div>
+        <!-- Change Password Modal Body -->
+                <div class="changepass-modal-body">
+                    <fieldset>
+                    <legend style="color: white";>Creat New Password</legend>
+                    <input placeholder='Current Password' id='currentPassTextBox' type='text' style="width: 70%;">
+                    <br><br>
+                    <input placeholder='New Password' id='changePassTextBox' type='text' style="width: 75%;">
+                    <br><br>
+                    <input placeholder='Confirm New Password' id='confirmPassTextBox' type='text' style="width: 75%;">
+                    <br><br>
+                    <button id='NewPassSave'>save</button>
+                </div>
+        <!-- Change Password Modal Footer -->
+                <div class="changepass-modal-footer">
+                    <h3>Don't Forget your password!</h3>
+                </div>
+            </div>
+        </div>
         <!-- End Change Password Modal -->
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -290,10 +311,10 @@
             };
             
             function passmodal() {
-                $(".password-modal").show();
+                $(".changepass-modal").show();
                 $(".close").off('click');
                 $(".close").on('click', function() {
-                    $(".password-modal").hide(); 
+                    $(".changepass-modal").hide(); 
                 });
             };
         </script>

@@ -55,7 +55,7 @@ var SettingsPage = {
     
     changeDeviceWifiCredentials: function() {
         if (($("#SSIDTextBox").val() != null) && ($("#SSIDTextBox").val().length > 0) && ($("#WifiPasswordTextBox").val() != null) && ($("#WifiPasswordTextBox").val().length > 0)) {
-            Util.setWifiCredentials($("SSIDTextBox").val(), $("WifiPasswordTextBox").val(), function(response) {
+            Util.setWifiCredentials($("#SSIDTextBox").val(), $("#WifiPasswordTextBox").val(), function(response) {
                 if(response.status === "ok") {
                     alert("successfully set credentials");
                 } else {
