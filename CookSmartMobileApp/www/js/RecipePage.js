@@ -31,10 +31,19 @@ var RecipePage = {
         if (recipes) {
             for (var i = 0; i < recipes.length; ++i) {
                 var preset = /^.*\(preset\)$/.test(recipes[i].name);
-                $(".recipe-row-container").append("<div id='recipe-row' class='recipe-row' data-recipe-name='" + recipes[i].name + "'><a class='recipe-name-link'>"
+                var recipeRowDiv = $("<div></div>");
+                recipeRowDiv.attr("id", "recipe-row");
+                recipeRowDiv.attr("class", "recipe-row");
+                recipeRowDiv.attr("data-recipe-name", recipes[i].name);
+                recipeRowDiv.append("<a class='recipe-name-link'>"
+                                        + recipes[i].name
+                                        + "</a>"
+                                        + ((preset) ? "" : "<span class='glyphicon glyphicon-trash recipe-delete'></span></div>"));
+                $(".recipe-row-container").append(recipeRowDiv);
+                /*$(".recipe-row-container").append("<div id='recipe-row' class='recipe-row' data-recipe-name='" + recipes[i].name + "'><a class='recipe-name-link'>"
                                                     + recipes[i].name
                                                     + "</a>"
-                                                    + ((preset) ? "" : "<span class='glyphicon glyphicon-trash recipe-delete'></span></div>"));
+                                                    + ((preset) ? "" : "<span class='glyphicon glyphicon-trash recipe-delete'></span></div>"));*/
             }
             $(".recipe-name-link").off('click');
             $(".recipe-name-link").on('click', function() {

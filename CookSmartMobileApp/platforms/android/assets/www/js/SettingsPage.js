@@ -10,6 +10,7 @@ var SettingsPage = {
     },
     
     connectToDevice: function() {
+        var deviceId = $("#deviceIdTextBox").val();
         if ($("#deviceIdTextBox").val() != null && $("#deviceIdTextBox").val().length > 0) {
             $.ajax({
                 url: Settings.server + '/ConnectToDevice',
@@ -18,6 +19,9 @@ var SettingsPage = {
                 data: JSON.stringify({ deviceId: $("#deviceIdTextBox").val() }),
                 success: function(response) {
                     if(response.status === "ok") {
+                        var user = JSON.parse(localStorage.getItem('user'));
+                        user['deviceId'] = deviceId;
+                        localStorage.setItem('user', JSON.stringify(user));
                         app.connectToDevice();
                         alert("connected device to account");
                     } else {
