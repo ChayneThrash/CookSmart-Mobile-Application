@@ -1,8 +1,8 @@
 var sessionId = localStorage.getItem('session');
  
-// if there was no localStorage for the session id 
-// the application is being run for the first time
-// the session id must be created
+//// if there was no localStorage for the session id 
+//// the application is being run for the first time
+//// the session id must be created
 if (!sessionId) {
     sessionId = uuid.v4();
     localStorage.setItem('session', sessionId);
